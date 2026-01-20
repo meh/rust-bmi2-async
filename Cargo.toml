@@ -1,16 +1,16 @@
 [package]
-name = "bmi2"
-description = "embedded-hal driver for the bmi270/260 IMU"
+name = "bmi2-async"
+description = "embedded-hal-async driver for the bmi270/260 IMU"
 version = "0.1.1"
 edition = "2021"
 license = "MIT"
-homepage = "https://github.com/qrasmont/bmi2"
-repository = "https://github.com/qrasmont/bmi2"
+homepage = "https://github.com/meh/rust-bmi2-async"
+repository = "https://github.com/meh/rust-bmi2-async"
 readme = "README.md"
-keywords = ["bmi2", "bmi270", "bmi260", "embedded-hal", "imu"]
+keywords = ["bmi2", "bmi270", "bmi260", "embedded-hal-async", "imu"]
 
 exclude = ["examples/nrf52840/.cargo"]
 
 [dependencies]
-embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
 fixedvec = "0.2.4"

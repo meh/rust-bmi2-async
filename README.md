@@ -8,10 +8,10 @@ This is an [embedded-hal](https://github.com/rust-embedded/embedded-hal) driver 
 
 ```rust
 // ...
-use bmi2::Bmi2;
-use bmi2::config;
-use bmi2::{types::Burst, I2cAddr, types::PwrCtrl};
-use embedded_hal::delay::DelayNs;
+use bmi2_async::Bmi2;
+use bmi2_async::config;
+use bmi2_async::{types::Burst, I2cAddr, types::PwrCtrl};
+use embedded_hal_async::delay::DelayNs;
 
 // Specify your delay type, for example:
 let delay = MyDelay::new(); // Replace with your actual delay implementation
@@ -31,16 +31,16 @@ let mut bmi = Bmi2::<_, _, BUFFER_SIZE>::new_i2c(
 );
 
 /// Get the chip id. Should be 0x24 or 36 in decimal
-let chip_id = bmi.get_chip_id().unwrap();
+let chip_id = bmi.get_chip_id().await.unwrap();
 /// Initialize the senor.
 /// During this process a configuration of > 8kB is uploaded to the sensor.
 /// Alternatively, for the BMI260 call its dedicated config:
 /// bmi.init(&config::BMI260_CONFIG_FILE).unwrap();
-bmi.init(&config::BMI270_CONFIG_FILE).unwrap();
+bmi.init(&config::BMI270_CONFIG_FILE).await.unwrap();
 /// Enable power for the accelerometer and the gyroscope.
 let pwr_ctrl = PwrCtrl { aux_en: false, gyr_en: true, acc_en: true, temp_en: false };
-bmi.set_pwr_ctrl(pwr_ctrl).unwrap();
+bmi.set_pwr_ctrl(pwr_ctrl).await.unwrap();
 /// Read the raw data
-let data = bmi.get_data().unwrap();
+let data = bmi.get_data().await.unwrap();
 // ...
 ```
